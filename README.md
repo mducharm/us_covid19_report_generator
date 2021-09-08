@@ -1,4 +1,11 @@
+## US COVID-19 Report Generation
 
+Provides US COVID-19 data as a CSV. Uses a Go gRPC server with Python Flask client.
+
+Powered by [Disease.sh](https://disease.sh/), which aggregates COVID-19 data from various worldometers.
+
+
+### Generating gRPC code from report.proto
 
 ```bash
 # for Go:
@@ -8,12 +15,5 @@ protoc --go_out=plugins=grpc:. .\report.proto
 
 ```bash
 # for Python:
-```
-
-```
-protoc --go_out=. --go_opt=paths=source_relative --go-grpc_out=. --go-grpc_opt=paths=source_relative .\helloworld\helloworld.proto 
-
-
-protoc --go_out=. --go_opt=paths=source_relative --grpc_python_out=. --grpc_python_out=paths=source_relative .\shared\covid19.proto 
-```
+python -m grpc_tools.protoc -I . --python_out=client --grpc_python_out=client .\report.proto
 ```
