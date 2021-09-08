@@ -2,8 +2,10 @@ package main
 
 import (
 	"context"
+	"io/ioutil"
 	"log"
 	"net"
+	"net/http"
 
 	pb "us_covid19_report/server/report"
 
@@ -12,25 +14,45 @@ import (
 
 const (
 	port = ":3000"
+	url  = "https://disease.sh/v3/covid-19/states"
 )
 
 type server struct {
 	pb.UnimplementedReportServer
 }
 
-func (s *server) GetReportAsCSV(ctx context.Context, in *pb.ReportRequest) (*pb.ReportResponse, error) {
-	return &pb.ReportResponse{Name: "test"}, nil
+type StateCovidData struct {
+	state               string // "California",
+	updated             uint   // 1631115135558,
+	cases               uint   // 4442304,
+	todayCases          uint   // 0,
+	deaths              uint   // 66587,
+	todayDeaths         uint   // 0,
+	recovered           uint   // 2323894,
+	active              uint   // 2051823,
+	casesPerOneMillion  uint   // 112429,
+	deathsPerOneMillion uint   // 1685,
+	tests               uint   // 84736996,
+	testsPerOneMillion  uint   // 2144577,
+	population          uint   // 39512223
 }
 
-// SayHello implements helloworld.GreeterServer
-// func (s *server) SayHello(ctx context.Context, in *pb.HelloRequest) (*pb.HelloReply, error) {
-// 	log.Printf("Received: %v", in.GetName())
-// 	return &pb.HelloReply{Message: "Hello " + in.GetName()}, nil
-// }
+func (s *server) GetReportAsCSV(ctx context.Context, in *pb.ReportRequest) (*pb.ReportResponse, error) {
 
-// func (s *server) SayHelloAgain(ctx context.Context, in *pb.HelloRequest) (*pb.HelloReply, error) {
-// 	return &pb.HelloReply{Message: "Hello again " + in.GetName()}, nil
-// }
+	resp, err := http.Get(url)
+	if err != nil {
+		return nil, err
+	}
+
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		return nil, err
+	}
+
+	sb := string(body)
+
+	return &pb.ReportResponse{Name: sb}, nil
+}
 
 func main() {
 	lis, err := net.Listen("tcp", port)
