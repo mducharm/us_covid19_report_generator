@@ -1,7 +1,7 @@
 package main
 
 import (
-	"context"
+	"encoding/json"
 	"io/ioutil"
 	"log"
 	"net"
@@ -21,37 +21,31 @@ type server struct {
 	pb.UnimplementedReportServer
 }
 
-type StateCovidData struct {
-	state               string // "California",
-	updated             uint   // 1631115135558,
-	cases               uint   // 4442304,
-	todayCases          uint   // 0,
-	deaths              uint   // 66587,
-	todayDeaths         uint   // 0,
-	recovered           uint   // 2323894,
-	active              uint   // 2051823,
-	casesPerOneMillion  uint   // 112429,
-	deathsPerOneMillion uint   // 1685,
-	tests               uint   // 84736996,
-	testsPerOneMillion  uint   // 2144577,
-	population          uint   // 39512223
-}
+func (s *server) GetCovidDataForAllStates(req *pb.ReportRequest, stream pb.Report_GetCovidDataForAllStatesServer) error {
 
-func (s *server) GetReportAsCSV(ctx context.Context, in *pb.ReportRequest) (*pb.ReportResponse, error) {
+	var stateData []*pb.StateCovidData
 
 	resp, err := http.Get(url)
 	if err != nil {
-		return nil, err
+		return err
 	}
 
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
-		return nil, err
+		return err
 	}
 
-	sb := string(body)
+	if err := json.Unmarshal(body, &stateData); err != nil {
+		return err
+	}
 
-	return &pb.ReportResponse{Name: sb}, nil
+	for _, data := range stateData {
+		if err := stream.Send(data); err != nil {
+			return err
+		}
+	}
+
+	return nil
 }
 
 func main() {
