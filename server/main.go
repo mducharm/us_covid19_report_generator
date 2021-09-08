@@ -11,15 +11,15 @@ import (
 )
 
 const (
-	port = ":50051"
+	port = ":3000"
 )
 
 type server struct {
-	pb.UnimplementedGreeterServer
+	pb.UnimplementedReportServer
 }
 
 func (s *server) GetReportAsCSV(ctx context.Context, in *pb.ReportRequest) (*pb.ReportResponse, error) {
-	return &pb.GetReportAsCSV{}, nil
+	return &pb.ReportResponse{Name: "test"}, nil
 }
 
 // SayHello implements helloworld.GreeterServer
@@ -37,6 +37,7 @@ func main() {
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
 	}
+	log.Printf("listening...")
 	s := grpc.NewServer()
 	pb.RegisterReportServer(s, &server{})
 	if err := s.Serve(lis); err != nil {
