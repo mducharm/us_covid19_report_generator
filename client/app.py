@@ -16,9 +16,11 @@ def hello_world():
     try:
         channel = grpc.insecure_channel('localhost:3000')
         stub = report_pb2_grpc.ReportStub(channel)
-        reportRequest = report_pb2.ReportRequest(name="test_request")
-        reportResponse = stub.GetReportAsCSV(reportRequest)
-        print(reportResponse)
+        reportRequest = report_pb2.ReportRequest()
+        reportResponse = stub.GetCovidDataForAllStates(reportRequest)
+
+        for stateData in reportResponse:
+            print(stateData)
 
         return str(reportResponse)
 

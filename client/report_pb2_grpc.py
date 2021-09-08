@@ -14,17 +14,17 @@ class ReportStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.GetReportAsCSV = channel.unary_unary(
-                '/report.Report/GetReportAsCSV',
+        self.GetCovidDataForAllStates = channel.unary_stream(
+                '/report.Report/GetCovidDataForAllStates',
                 request_serializer=report__pb2.ReportRequest.SerializeToString,
-                response_deserializer=report__pb2.ReportResponse.FromString,
+                response_deserializer=report__pb2.StateCovidData.FromString,
                 )
 
 
 class ReportServicer(object):
     """Missing associated documentation comment in .proto file."""
 
-    def GetReportAsCSV(self, request, context):
+    def GetCovidDataForAllStates(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -33,10 +33,10 @@ class ReportServicer(object):
 
 def add_ReportServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'GetReportAsCSV': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetReportAsCSV,
+            'GetCovidDataForAllStates': grpc.unary_stream_rpc_method_handler(
+                    servicer.GetCovidDataForAllStates,
                     request_deserializer=report__pb2.ReportRequest.FromString,
-                    response_serializer=report__pb2.ReportResponse.SerializeToString,
+                    response_serializer=report__pb2.StateCovidData.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -49,7 +49,7 @@ class Report(object):
     """Missing associated documentation comment in .proto file."""
 
     @staticmethod
-    def GetReportAsCSV(request,
+    def GetCovidDataForAllStates(request,
             target,
             options=(),
             channel_credentials=None,
@@ -59,8 +59,8 @@ class Report(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/report.Report/GetReportAsCSV',
+        return grpc.experimental.unary_stream(request, target, '/report.Report/GetCovidDataForAllStates',
             report__pb2.ReportRequest.SerializeToString,
-            report__pb2.ReportResponse.FromString,
+            report__pb2.StateCovidData.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

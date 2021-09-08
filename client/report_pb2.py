@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=b'Z\017./server/report',
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x0creport.proto\x12\x06report\"\x1d\n\rReportRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\"8\n\nCurrencies\x12\x0c\n\x04\x63ode\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x0e\n\x06symbol\x18\x03 \x01(\t\"\xa6\x01\n\x0eReportResponse\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x12\n\nalpha2Code\x18\x02 \x01(\t\x12\x0f\n\x07\x63\x61pital\x18\x03 \x01(\t\x12\x11\n\tsubregion\x18\x04 \x01(\t\x12\x12\n\npopulation\x18\x05 \x01(\x05\x12\x12\n\nnativeName\x18\x06 \x01(\t\x12&\n\ncurrencies\x18\x07 \x03(\x0b\x32\x12.report.Currencies2K\n\x06Report\x12\x41\n\x0eGetReportAsCSV\x12\x15.report.ReportRequest\x1a\x16.report.ReportResponse\"\x00\x42\x11Z\x0f./server/reportb\x06proto3'
+  serialized_pb=b'\n\x0creport.proto\x12\x06report\"\x0f\n\rReportRequest\"\x93\x02\n\x0eStateCovidData\x12\r\n\x05state\x18\x01 \x01(\t\x12\x0f\n\x07updated\x18\x02 \x01(\x04\x12\r\n\x05\x63\x61ses\x18\x03 \x01(\x04\x12\x12\n\ntodayCases\x18\x04 \x01(\x04\x12\x0e\n\x06\x64\x65\x61ths\x18\x05 \x01(\x04\x12\x13\n\x0btodayDeaths\x18\x06 \x01(\x04\x12\x11\n\trecovered\x18\x07 \x01(\x04\x12\x0e\n\x06\x61\x63tive\x18\x08 \x01(\x04\x12\x1a\n\x12\x63\x61sesPerOneMillion\x18\t \x01(\x04\x12\x1b\n\x13\x64\x65\x61thsPerOneMillion\x18\n \x01(\x04\x12\r\n\x05tests\x18\x0b \x01(\x04\x12\x1a\n\x12testsPerOneMillion\x18\x0c \x01(\x04\x12\x12\n\npopulation\x18\r \x01(\x04\x32W\n\x06Report\x12M\n\x18GetCovidDataForAllStates\x12\x15.report.ReportRequest\x1a\x16.report.StateCovidData\"\x00\x30\x01\x42\x11Z\x0f./server/reportb\x06proto3'
 )
 
 
@@ -33,13 +33,6 @@ _REPORTREQUEST = _descriptor.Descriptor(
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
-    _descriptor.FieldDescriptor(
-      name='name', full_name='report.ReportRequest.name', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -53,110 +46,106 @@ _REPORTREQUEST = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=24,
-  serialized_end=53,
+  serialized_end=39,
 )
 
 
-_CURRENCIES = _descriptor.Descriptor(
-  name='Currencies',
-  full_name='report.Currencies',
+_STATECOVIDDATA = _descriptor.Descriptor(
+  name='StateCovidData',
+  full_name='report.StateCovidData',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='code', full_name='report.Currencies.code', index=0,
+      name='state', full_name='report.StateCovidData.state', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='name', full_name='report.Currencies.name', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='symbol', full_name='report.Currencies.symbol', index=2,
-      number=3, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=55,
-  serialized_end=111,
-)
-
-
-_REPORTRESPONSE = _descriptor.Descriptor(
-  name='ReportResponse',
-  full_name='report.ReportResponse',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='name', full_name='report.ReportResponse.name', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='alpha2Code', full_name='report.ReportResponse.alpha2Code', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='capital', full_name='report.ReportResponse.capital', index=2,
-      number=3, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='subregion', full_name='report.ReportResponse.subregion', index=3,
-      number=4, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='population', full_name='report.ReportResponse.population', index=4,
-      number=5, type=5, cpp_type=1, label=1,
+      name='updated', full_name='report.StateCovidData.updated', index=1,
+      number=2, type=4, cpp_type=4, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='nativeName', full_name='report.ReportResponse.nativeName', index=5,
-      number=6, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
+      name='cases', full_name='report.StateCovidData.cases', index=2,
+      number=3, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='currencies', full_name='report.ReportResponse.currencies', index=6,
-      number=7, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
+      name='todayCases', full_name='report.StateCovidData.todayCases', index=3,
+      number=4, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='deaths', full_name='report.StateCovidData.deaths', index=4,
+      number=5, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='todayDeaths', full_name='report.StateCovidData.todayDeaths', index=5,
+      number=6, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='recovered', full_name='report.StateCovidData.recovered', index=6,
+      number=7, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='active', full_name='report.StateCovidData.active', index=7,
+      number=8, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='casesPerOneMillion', full_name='report.StateCovidData.casesPerOneMillion', index=8,
+      number=9, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='deathsPerOneMillion', full_name='report.StateCovidData.deathsPerOneMillion', index=9,
+      number=10, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='tests', full_name='report.StateCovidData.tests', index=10,
+      number=11, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='testsPerOneMillion', full_name='report.StateCovidData.testsPerOneMillion', index=11,
+      number=12, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='population', full_name='report.StateCovidData.population', index=12,
+      number=13, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
@@ -172,14 +161,12 @@ _REPORTRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=114,
-  serialized_end=280,
+  serialized_start=42,
+  serialized_end=317,
 )
 
-_REPORTRESPONSE.fields_by_name['currencies'].message_type = _CURRENCIES
 DESCRIPTOR.message_types_by_name['ReportRequest'] = _REPORTREQUEST
-DESCRIPTOR.message_types_by_name['Currencies'] = _CURRENCIES
-DESCRIPTOR.message_types_by_name['ReportResponse'] = _REPORTRESPONSE
+DESCRIPTOR.message_types_by_name['StateCovidData'] = _STATECOVIDDATA
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 ReportRequest = _reflection.GeneratedProtocolMessageType('ReportRequest', (_message.Message,), {
@@ -189,19 +176,12 @@ ReportRequest = _reflection.GeneratedProtocolMessageType('ReportRequest', (_mess
   })
 _sym_db.RegisterMessage(ReportRequest)
 
-Currencies = _reflection.GeneratedProtocolMessageType('Currencies', (_message.Message,), {
-  'DESCRIPTOR' : _CURRENCIES,
+StateCovidData = _reflection.GeneratedProtocolMessageType('StateCovidData', (_message.Message,), {
+  'DESCRIPTOR' : _STATECOVIDDATA,
   '__module__' : 'report_pb2'
-  # @@protoc_insertion_point(class_scope:report.Currencies)
+  # @@protoc_insertion_point(class_scope:report.StateCovidData)
   })
-_sym_db.RegisterMessage(Currencies)
-
-ReportResponse = _reflection.GeneratedProtocolMessageType('ReportResponse', (_message.Message,), {
-  'DESCRIPTOR' : _REPORTRESPONSE,
-  '__module__' : 'report_pb2'
-  # @@protoc_insertion_point(class_scope:report.ReportResponse)
-  })
-_sym_db.RegisterMessage(ReportResponse)
+_sym_db.RegisterMessage(StateCovidData)
 
 
 DESCRIPTOR._options = None
@@ -213,16 +193,16 @@ _REPORT = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=282,
-  serialized_end=357,
+  serialized_start=319,
+  serialized_end=406,
   methods=[
   _descriptor.MethodDescriptor(
-    name='GetReportAsCSV',
-    full_name='report.Report.GetReportAsCSV',
+    name='GetCovidDataForAllStates',
+    full_name='report.Report.GetCovidDataForAllStates',
     index=0,
     containing_service=None,
     input_type=_REPORTREQUEST,
-    output_type=_REPORTRESPONSE,
+    output_type=_STATECOVIDDATA,
     serialized_options=None,
     create_key=_descriptor._internal_create_key,
   ),
