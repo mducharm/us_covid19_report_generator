@@ -4,6 +4,16 @@ Provides US COVID-19 data as a CSV. Uses a Go gRPC server with Python Flask clie
 
 Powered by [Disease.sh](https://disease.sh/), which aggregates COVID-19 data from various worldometers.
 
+### Running Locally
+
+```bash
+# server
+go run .\server\main.go
+
+# client
+python app.py
+```
+
 
 ### Generating gRPC code from report.proto
 
