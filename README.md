@@ -4,6 +4,8 @@ Provides US COVID-19 data as a CSV. Uses a Go gRPC server with Python Flask clie
 
 Powered by [Disease.sh](https://disease.sh/), which aggregates COVID-19 data from various worldometers.
 
+Completed as a part of Waystar Day (September 2021).
+
 ### Running Locally
 
 ```bash
